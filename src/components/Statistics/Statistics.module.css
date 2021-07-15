@@ -1,0 +1,38 @@
+  .container {
+    width: 600px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: rgb(189, 219, 219);
+}
+
+.statContainer {
+    width: 400px;
+    margin: 65px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+        padding: 25px;
+}
+
+.title {
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.statsList {
+    display: flex;
+    padding: 15px;
+        list-style: none;
+        justify-content: space-around;
+}
+
+.label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: gray;
+}
+
+.percentage {
+    display: block;
+    font-weight: 700;
+}
