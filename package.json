@@ -1,8 +1,8 @@
 {
-  "name": "goit-react-hw-01-components",
+  "name": "goit-react-hw-02-feedback",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://AnnaChebrova.github.io/goit-react-hw-01-components",
+  "homepage": "https://AnnaChebrova.github.io/goit-react-hw-02-feedback",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -18,7 +18,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -41,6 +43,7 @@
   "devDependencies": {
     "husky": "^7.0.1",
     "lint-staged": "^11.0.1",
-    "prettier": "^2.3.2"
+    "prettier": "^2.3.2",
+    "prop-types": "^15.7.2"
   }
 }
