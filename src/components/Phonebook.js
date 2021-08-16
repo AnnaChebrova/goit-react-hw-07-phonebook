@@ -19,6 +19,17 @@ class Phonebook extends React.Component {
         filter: ''
       };
 
+      componentDidMount() {
+          if (localStorage.getItem("contacts")) {
+              this.setState({contacts: JSON.parse(localStorage.getItem("contacts"))});
+          }
+      }
+
+      componentDidUpdate(prevState) {
+          if (this.setState.contacts !== prevState.contacts) {
+              localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
+          }
+      }
 
       addContact = (name, number) => {
           if (this.state.contacts.find((contact) => name.toLowerCase()
