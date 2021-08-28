@@ -35,9 +35,20 @@ const defaultContacts = [
           name,
           number,
         };
-        console.log(contact);
+
         setContacts((prev) => { return [...prev, contact] });
       };
+
+      const existsContact = currentName => {
+        if (!contacts) {
+          return
+        }
+    
+        if (contacts.find(({ name }) => name.toLowerCase() === currentName)) {
+          alert(`${currentName} is already exists in contacts`);
+          return true;
+        }
+      }
 
     const deleteContact = (contactId => {
         setContacts(contacts.filter(contact => contact.id !== contactId))
@@ -47,21 +58,10 @@ const defaultContacts = [
         setFilter(e.currentTarget.value);
       };
 
-      // const visibleContacts = () => {
-
-      //   const normalizedFilter = filter.toLowerCase();
-    
-      //   return contacts.filter(contact =>
-      //     contact.name.toLowerCase().includes(normalizedFilter)
-      //   );
-          
-        
-      // };
-
       return (
         <div className={styles.container}>
         <h1>Phonebook</h1>
-        <ContactForm contacts={contacts} onSubmit={addContact} />
+        <ContactForm contacts={contacts} onSubmit={addContact} existsContact={existsContact} />
 
         <h2>Contacts</h2>
         <Filter value={filter} onChange={changeFilter} />

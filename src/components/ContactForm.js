@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './phonebook.module.css'
 
-const ContactForm = ({ onSubmit }) => {
+const ContactForm = ({ existsContact, onSubmit }) => {
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -25,6 +25,9 @@ const ContactForm = ({ onSubmit }) => {
 
   const handleSubmit = event => {
       event.preventDefault();
+      if (existsContact(name.toLowerCase())) {
+       return
+      };
       onSubmit(name, number);
       setName('');
       setNumber('');
