@@ -1,13 +1,28 @@
 import { useState } from 'react';
 import React from 'react';
+import { connect }  from 'react-redux';
+import { useDispatch, useSelector }  from 'react-redux';
+import { contactsAdd, contactsDelete } from '../redux/contactsSlice'
+import shortid from 'shortid';
 
 import styles from './phonebook.module.css'
 
-const ContactForm = ({ existsContact, onSubmit }) => {
+const ContactForm = () => {
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  
+
+  const dispatch = useDispatch();
+
+  const items = useSelector((state) => state.contacts.items);
+  const error = useSelector((state) => state.contacts.error);
+
+//   useEffect(()=>{
+//     window.localStorage.setItem('contacts',JSON.stringify(contacts))
+//   },[contacts])
+
+
+
   const handleInputChange = (e) => {
       const { name, value } = e.currentTarget;
 
@@ -23,17 +38,30 @@ const ContactForm = ({ existsContact, onSubmit }) => {
       }
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
       event.preventDefault();
-      if (existsContact(name.toLowerCase())) {
-       return
+      const newContact = {
+        id: shortid.generate(),
+        name: name,
+        number: number,
       };
-      onSubmit(name, number);
-      setName('');
-      setNumber('');
+           
+    dispatch(contactsAdd(newContact))
+        
+    setName('');
+    setNumber('');
   }
 
+  
+    //   if (existsContact(name.toLowerCase())) {
+    //    return
+    //   };
+
+   
+//   const deleteContact = (id) => dispatch(contactsDelete(id));
+
   return (
+      <div>
       <form
           className={styles.form} onSubmit={handleSubmit} >
           <>
@@ -58,7 +86,19 @@ const ContactForm = ({ existsContact, onSubmit }) => {
               </button>
           </>    
       </form>
+      {error && <p>{error}</p>}
+
+ 
+ </div>
   )
-};
+}
 
 export default ContactForm;
+
+
+// const mapDispatchToProps = dispatch => ({
+//     onSubmit: value => dispatch (onAddContact.addContact(value)),
+//     });
+
+
+//   export default connect(null, mapDispatchToProps)(ContactForm)
