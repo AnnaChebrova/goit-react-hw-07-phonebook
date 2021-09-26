@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import React from 'react';
-import { connect }  from 'react-redux';
 import { useDispatch, useSelector }  from 'react-redux';
-import { contactsAdd, contactsDelete } from '../redux/contactsSlice'
+import { contactsAdd } from '../redux/contactsSlice'
 import shortid from 'shortid';
 
 import styles from './phonebook.module.css'
@@ -14,14 +13,7 @@ const ContactForm = () => {
 
   const dispatch = useDispatch();
 
-  const items = useSelector((state) => state.contacts.items);
   const error = useSelector((state) => state.contacts.error);
-
-//   useEffect(()=>{
-//     window.localStorage.setItem('contacts',JSON.stringify(contacts))
-//   },[contacts])
-
-
 
   const handleInputChange = (e) => {
       const { name, value } = e.currentTarget;
@@ -52,14 +44,6 @@ const ContactForm = () => {
     setNumber('');
   }
 
-  
-    //   if (existsContact(name.toLowerCase())) {
-    //    return
-    //   };
-
-   
-//   const deleteContact = (id) => dispatch(contactsDelete(id));
-
   return (
       <div>
       <form
@@ -81,24 +65,14 @@ const ContactForm = () => {
               </label>    
               
           <button  type="submit"
-              className={styles.btn} >
+              className={styles.btnForm} >
               Add contact
               </button>
           </>    
       </form>
-      {error && <p>{error}</p>}
-
- 
+      {error && <p className={styles.error}>{error}</p>}
  </div>
   )
 }
 
 export default ContactForm;
-
-
-// const mapDispatchToProps = dispatch => ({
-//     onSubmit: value => dispatch (onAddContact.addContact(value)),
-//     });
-
-
-//   export default connect(null, mapDispatchToProps)(ContactForm)

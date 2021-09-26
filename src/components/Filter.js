@@ -1,6 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import {findContact} from '../redux/contactsSlice'
 import { useSelector, useDispatch } from "react-redux";
+import styles from './phonebook.module.css'
 
 function Filter() {
 const dispatch = useDispatch();
@@ -21,40 +22,15 @@ const handleSearch = useCallback(() => {
     <label>
         Find contacts by name
         <input type="text" value={query} 
-        onChange={handleChange} />
-        <button onClick={handleSearch}>Найти контакт</button>
+        onChange={handleChange} className={styles.inputFilter}/>
+        <button onClick={handleSearch} className={styles.btnFilter}>Найти контакт</button>
       </label>
-
        {filteredItems.map((item) => (
         <p key={item.id}>{item.name}: {item.number}
-
         </p>
-        
          ))}
     </div>
-
  );
 };
-
-// const Filter = () => {
-//     const value = useSelector(((state) => state.contacts.items));
-//     const dispatch = useDispatch();
-//     const onChange = (e) =>
-//       dispatch(filter(e.target.value));
-//     return (
-//       <label>
-//         Find contacts by name
-//         <input type="text" value={value} onChange={onChange} />
-//       </label>
-//     );
-//   };
-
-// const value = (e) => e.currentTarget;
-
-// const Filter = ({ payload, onChange }) => (
-//     <label> Find contact by name
-// <input type="text" value={payload} onChange={onChange}/>
-//     </label>
-// );
 
 export default Filter;

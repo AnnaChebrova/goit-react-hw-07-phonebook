@@ -29,31 +29,10 @@ export const contactsSlice = createSlice({
     },
 
     findContact: (state, action) => {
-      // action: {payload: ''}
       state.filteredItems = state.items.filter((c) =>
        c.name.includes(action.payload))
       
     },
-
-    // filter: (state, action)  => { 
-    //   state.filter = state.find((contact) => contact.id === action.payload)
-
-    //   }
-
-  // filter: (state, action) => { 
-  //   state.filter = state.find(({ id }) => id !== action.payload),
-  //    (_, { payload }) => payload;
-  // }
-
-      // state.items = state.items.filter((c) => {
-      //   return c.id === action.payload;
-      // } ) ;
-    //     [actions.changeFilter]: (_, { payload }) => payload,
-    // });
-      //     return state; 
-      // const changeFilter = e => {
-        //     setFilter(e.currentTarget.value);
-        //   }
       } 
   },
 )
