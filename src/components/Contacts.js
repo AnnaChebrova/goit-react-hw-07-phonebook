@@ -1,26 +1,41 @@
-import { useDispatch, useSelector }  from 'react-redux';
-import {contactsDelete} from '../redux/contactsSlice'
-import styles from './phonebook.module.css'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteContact as deleteContactThunk } from '../redux/thunk';
+import { getContactsSelector } from '../redux/Selectors/contacts-selectors';
+import { getContacts as getContactsThunk } from '../redux/thunk';
+
+import styles from './phonebook.module.css';
 
 function Contacts() {
-    const items = useSelector((state) => state.contacts.items);
-    
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const deleteContact = id => {
-        dispatch(contactsDelete(id))
-    }
+  const items = useSelector(getContactsSelector);
 
-    return (
-        <div className={styles.list}>
-             {items.map((item) => (
-            <p key={item.id} className={styles.contact}>{item.name}: {item.number}
-            <button type="button" onClick={() => deleteContact(item.id)} className={styles.btnList}>
-                 delete contact
+  useEffect(() => {
+    dispatch(getContactsThunk());
+  }, [dispatch]);
+
+  const deleteContact = id => {
+    dispatch(deleteContactThunk(id));
+  };
+
+  return (
+    <div className={styles.list}>
+      {items &&
+        items.map(item => (
+          <p key={item.id} className={styles.contact}>
+            {item.name}: {item.number}
+            <button
+              type="button"
+              onClick={() => deleteContact(item.id)}
+              className={styles.btnList}
+            >
+              delete contact
             </button>
-            </p>
-             ))}
-        </div>
-    )}
+          </p>
+        ))}
+    </div>
+  );
+}
 
 export default Contacts;
